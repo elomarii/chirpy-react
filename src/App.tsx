@@ -6,11 +6,13 @@ function App() {
 
   return (
     <>
-      <div className="container text-center">
-        <div className="row">
-          {/* NAVBAR */}
+      <div className="row">
+        {/* NAVBAR */}
+        <div className="col">
           <NavBar />
-          {/* BODY CONTENT */}
+        </div>
+        {/* BODY CONTENT */}
+        <div className="col-8">
           <div className="content">
             {Object.keys(posts).length == 0
               ? "Nothing to show.. yet!"
@@ -22,7 +24,9 @@ function App() {
             categories={["DFIR", "Web"]}
             date="2024-11-05"
           />
-          {/* SIDEBAR */}
+        </div>
+        {/* SIDEBAR */}
+        <div className="col">
           <div className="sidebar">Column</div>
         </div>
       </div>
