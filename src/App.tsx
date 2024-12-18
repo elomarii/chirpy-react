@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import BlogCard from "./components/BlogCard";
+import NavBar from "./components/NavBar";
 
 function App() {
-  const [count, setCount] = useState(0)
+  var posts: Record<string, Function> = import.meta.glob("./blog/posts/*");
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container text-center">
+        <div className="row">
+          {/* NAVBAR */}
+          <NavBar />
+          {/* BODY CONTENT */}
+          <div className="content">
+            {Object.keys(posts).length == 0
+              ? "Nothing to show.. yet!"
+              : "Content here"}
+          </div>
+          <BlogCard
+            title="Hello"
+            description="hello again"
+            categories={["DFIR", "Web"]}
+            date="2024-11-05"
+          />
+          {/* SIDEBAR */}
+          <div className="sidebar">Column</div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
