@@ -1,9 +1,11 @@
-import BlogCard from "./components/BlogCard";
+import { ReactNode } from "react";
 import NavBar from "./components/NavBar";
 
-function App() {
-  var posts: Record<string, Function> = import.meta.glob("./blog/posts/*");
+interface Props {
+  children: ReactNode;
+}
 
+function App({ children }: Props) {
   return (
     <>
       <div className="row">
@@ -12,19 +14,7 @@ function App() {
           <NavBar />
         </div>
         {/* BODY CONTENT */}
-        <div className="col-8">
-          <div className="content">
-            {Object.keys(posts).length == 0
-              ? "Nothing to show.. yet!"
-              : "Content here"}
-          </div>
-          <BlogCard
-            title="Hello"
-            description="hello again"
-            categories={["DFIR", "Web"]}
-            date="2024-11-05"
-          />
-        </div>
+        <div className="col-8">{children}</div>
         {/* SIDEBAR */}
         <div className="col">
           <div className="sidebar">Column</div>

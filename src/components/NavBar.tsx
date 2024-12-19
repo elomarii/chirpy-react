@@ -1,9 +1,6 @@
 function NavBar() {
-  const tabsPath: string = "/public/blog/tabs/";
-  const tabs: Record<string, Function> = import.meta.glob(
-    "/public/blog/tabs/*"
-  );
   const path = window.location.pathname;
+  const tabs: string[] = ["blog", "projects", "whoami"];
 
   return (
     <div className="navbar">
@@ -11,19 +8,15 @@ function NavBar() {
         <a className="nav-link" aria-current="page" key="home" href="/">
           home
         </a>
-        {Object.keys(tabs).map((filePath, index) => {
-          const tabname: string = filePath
-            .replace(`${tabsPath}`, "")
-            .replace(".md", "")
-            .toLowerCase();
+        {tabs.map((tab, index) => {
           return (
             <a
-              className={path == `/${tabname}` ? "nav-link active" : "nav-link"}
+              className={path == `/${tab}` ? "nav-link active" : "nav-link"}
               aria-current="page"
               key={index}
-              href={`/${tabname}`}
+              href={`/${tab}`}
             >
-              {tabname}
+              {tab}
             </a>
           );
         })}
