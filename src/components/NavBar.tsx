@@ -1,6 +1,8 @@
 function NavBar() {
-  const tabsPath: string = "../blog/tabs/";
-  const tabs: Record<string, Function> = import.meta.glob("../blog/tabs/*");
+  const tabsPath: string = "/public/blog/tabs/";
+  const tabs: Record<string, Function> = import.meta.glob(
+    "/public/blog/tabs/*"
+  );
   const path = window.location.pathname;
 
   return (
