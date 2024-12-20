@@ -3,17 +3,24 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { readMarkdown } from "../utils";
 interface Props {
   path: string;
 }
 
 function MdRenderer({ path }: Props) {
-  const [markdown, setMarkdown] = useState("");
+  const [content, setContent] = useState("");
+  const [frontMatter, setFrontMatter] = useState(Object);
   fetch(path)
     .then((response) => response.text())
-    .then((text) => setMarkdown(text));
+    .then((text) => {
+      const { frontMatter, content } = readMarkdown(text);
+      setContent(content);
+      setFrontMatter(frontMatter);
+    });
   return (
     <article>
+      <h1>{frontMatter.title}</h1>
       <Markdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -31,7 +38,7 @@ function MdRenderer({ path }: Props) {
           },
         }}
       >
-        {markdown}
+        {content}
       </Markdown>
     </article>
   );
