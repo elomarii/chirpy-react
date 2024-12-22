@@ -17,7 +17,7 @@ function BlogCard({
 }: Props) {
   return (
     <>
-      <div className="card" style={{ margin: "10px" }}>
+      <div className="card mb-3" style={{ margin: "10px" }}>
         <a
           href={path}
           style={{
@@ -25,8 +25,8 @@ function BlogCard({
             color: "inherit",
           }}
         >
-          <div className="row">
-            <div className="col-8">
+          <div className="row g-0">
+            <div className="col-md-8">
               <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <h6 className="card-subtitle mb-2 text-body-secondary">
@@ -36,9 +36,14 @@ function BlogCard({
                 <p className="card-subtitle mb-2 text-body-secondary">{date}</p>
               </div>
             </div>
-            <div className="col">
+            <div className="col-md-4">
               {image ? (
-                <img src={image} className="card-img-top" alt="..." />
+                <img
+                  src={image}
+                  className="img-fluid rounded-end"
+                  alt="..."
+                  style={{ height: "100%" }}
+                />
               ) : (
                 <span />
               )}
