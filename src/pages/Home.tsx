@@ -12,7 +12,9 @@ export default function Home() {
   const [fmatters, setFmatters] = useState<FrontMatter[]>([]);
 
   const articlePerPage = 5;
-  const articles = Object.keys(import.meta.glob("/public/posts/*"))
+  const articles = Object.keys(
+    import.meta.glob(["/public/posts/*.md", "/public/projects/*.md"])
+  )
     .reverse()
     .map((filepath, _index) => filepath.replace("/public", ""));
 

@@ -11,7 +11,10 @@ import Blog from "./pages/Blog.tsx";
 import Projects from "./pages/Projects.tsx";
 
 // Define all routes and respective components
-const articles = import.meta.glob("/public/posts/*");
+const articles = import.meta.glob([
+  "/public/posts/*.md",
+  "/public/projects/*.md",
+]);
 const articlesRoutes = Object.keys(articles).map((filepath, _index) => {
   const path = filepath.replace("/public", "");
   return {
