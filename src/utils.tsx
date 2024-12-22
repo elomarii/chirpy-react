@@ -28,3 +28,10 @@ export function readMarkdown(input: string): {
     content,
   };
 }
+
+export function listToString(list: string[]): string {
+  if (list.length == 0) return "";
+  let result: string = list[0];
+  list.slice(1).map((element) => (result = `${result}, ${element}`));
+  return result;
+}

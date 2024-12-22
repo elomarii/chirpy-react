@@ -1,3 +1,5 @@
+import { listToString } from "../utils";
+
 interface Props {
   title: string;
   description: string;
@@ -30,10 +32,11 @@ function BlogCard({
               <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <h6 className="card-subtitle mb-2 text-body-secondary">
-                  {categories}
+                  {description}
                 </h6>
-                <p className="card-text">{description}</p>
-                <p className="card-subtitle mb-2 text-body-secondary">{date}</p>
+                <p className="card-subtitle mb-2 text-body-secondary">{`${date} | ${listToString(
+                  categories
+                )}`}</p>
               </div>
             </div>
             <div className="col-md-4">

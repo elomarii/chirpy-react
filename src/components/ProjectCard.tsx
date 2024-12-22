@@ -1,3 +1,5 @@
+import { listToString } from "../utils";
+
 interface Props {
   title: string;
   description: string;
@@ -27,7 +29,7 @@ function ProjectCard({
         >
           <div
             style={{
-              backgroundColor: image ? "" : "red",
+              backgroundColor: image ? "" : "cyan",
               minWidth: "-webkit-fill-available",
               height: "3em",
               marginTop: "0.2em",
@@ -44,9 +46,12 @@ function ProjectCard({
           </div>
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
-            <p className="card-text">{description}</p>
-            <p className="card-text">{categories}</p>
-            <p className="card-subtitle mb-2 text-body-secondary">{date}</p>
+            <h6 className="card-subtitle mb-2 text-body-secondary">
+              {description}
+            </h6>
+            <p className="card-text">{`${date} | ${listToString(
+              categories
+            )}`}</p>
           </div>
         </a>
       </div>
