@@ -43,18 +43,20 @@ export default function Home() {
 
   return (
     <>
-      {fmatters.map((fmatter) => {
-        return (
-          <BlogCard
-            title={fmatter.title}
-            path={fmatter.path.replace(".md", "")}
-            description={fmatter.description}
-            categories={fmatter.categories}
-            date={fmatter.date}
-            image={fmatter.image}
-          />
-        );
-      })}
+      <div id="post-list" className="flex-grow-1 px-xl-1">
+        {fmatters.map((fmatter) => {
+          return (
+            <BlogCard
+              title={fmatter.title}
+              path={fmatter.path.replace(".md", "")}
+              description={fmatter.description}
+              categories={fmatter.categories}
+              date={fmatter.date}
+              image={fmatter.image}
+            />
+          );
+        })}
+      </div>
       <Pagination
         currentPage={page}
         pagesCount={pagesCount}
