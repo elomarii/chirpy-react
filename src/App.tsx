@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 interface Props {
   children: ReactNode;
@@ -31,6 +32,9 @@ function App({ children }: Props) {
               {% include_cached trending-tags.html lang=lang %} */}
             </div>
           </aside>
+
+          {/* FOOTER */}
+          <Footer />
         </div>
       </div>
     </>

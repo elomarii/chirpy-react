@@ -32,7 +32,11 @@ function NavBar() {
               <li
                 className={path == `/${tab}` ? "nav-item active" : "nav-item"}
               >
-                <a className="nav-link" key={index} href={`/${tab}`}>
+                <a
+                  className="nav-link"
+                  key={index}
+                  href={`/${tab.toLowerCase()}`}
+                >
                   <span>{tab}</span>
                 </a>
               </li>
