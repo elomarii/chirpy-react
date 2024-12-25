@@ -20,10 +20,18 @@ function BlogCard({
   return (
     <>
       <article className="card-wrapper card">
-        <a href={path} className="post-preview row g-0 flex-md-row">
-          <div className="col-md-8">
-            <div className="card-body">
-              <h1 className="card-title">{title}</h1>
+        <a href={path} className="post-preview row g-0 flex-md-row-reverse">
+          {image ? (
+            <div className="col-md-5">
+              <img src={image} />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          <div className={image ? "col-md-7" : "col-md-12"}>
+            <div className="card-body d-flex flex-column">
+              <h1 className="card-title my-2 mt-md-0">{title}</h1>
               <div className="card-text content mt-0 mb-3">
                 <p>{description}</p>
               </div>
@@ -33,18 +41,6 @@ function BlogCard({
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-4">
-            {image ? (
-              <img
-                src={image}
-                className="img-fluid rounded-end"
-                alt="..."
-                style={{ height: "100%" }}
-              />
-            ) : (
-              <span />
-            )}
           </div>
         </a>
       </article>

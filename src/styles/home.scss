@@ -91,6 +91,10 @@
     a:hover {
       text-decoration: none;
     }
+
+    .page-counter {
+      display: none;
+    }
   
     .page-item {
       .page-link {
@@ -162,6 +166,9 @@
         &:not(:first-child):not(:last-child) {
           display: none;
         }
+      }
+      .page-counter {
+        display: block;
       }
     }
   }

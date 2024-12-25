@@ -30,6 +30,7 @@ function pagination({ currentPage, pagesCount, setPage }: Props) {
             </a>
           </li>
         ))}
+        <li className="page-counter">{currentPage + 1 + "/" + pagesCount}</li>
         <li
           className={
             currentPage == pagesCount - 1 ? "page-item disabled" : "page-item"
