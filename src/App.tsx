@@ -8,16 +8,29 @@ interface Props {
 function App({ children }: Props) {
   return (
     <>
-      <div className="row">
-        {/* NAVBAR */}
-        <div className="col">
-          <NavBar />
-        </div>
-        {/* BODY CONTENT */}
-        <div className="col-8">{children}</div>
-        {/* SIDEBAR */}
-        <div className="col">
-          <div className="sidebar">Column</div>
+      {/* NAVBAR */}
+      <NavBar />
+      <div id="main-wrapper" className="d-flex justify-content-center">
+        <div className="container d-flex flex-column px-xxl-5">
+          {/* MAIN CONTENT */}
+          <main
+            aria-label="Main Content"
+            className="col-12 col-lg-11 col-xl-9 px-md-4"
+          >
+            {children}
+          </main>
+
+          {/* SIDEBAR */}
+          <aside
+            aria-label="Panel"
+            id="panel-wrapper"
+            className="col-xl-3 ps-2 mb-5 text-muted"
+          >
+            <div className="access">
+              {/* {% include_cached update-list.html lang=lang %}
+              {% include_cached trending-tags.html lang=lang %} */}
+            </div>
+          </aside>
         </div>
       </div>
     </>
