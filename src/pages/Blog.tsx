@@ -1,22 +1,36 @@
 import { categories } from "../main";
+import Page from "./Page";
 
 function Blog() {
   // get all root categories
   return (
-    <ul>
+    <Page title="Blog categories">
       {Array.from(categories?.keys() ?? []).map((key, index) => (
-        <li key={`cat-${index}`}>
-          <a href={`categories/${key}`}>{key}</a>
-          <ul>
-            {[...(categories?.get(key) ?? [])].map((cat) => (
-              <li key={"subcat-" + cat}>
-                <a href={`categories/${cat}`}>{cat}</a>
-              </li>
-            ))}
-          </ul>
-        </li>
+        <div className="card categories">
+          <div
+            id={`h_${index}`}
+            className="card-header d-flex justify-content-between hide-border-bottom"
+          >
+            <span className="ms-2">
+              <a href={`/${key}`} className="mx-2">
+                {key}
+              </a>
+            </span>
+          </div>
+          <div id={key} className="shadow">
+            <ul className="list-group">
+              {[...categories?.get(key)].map((subcat) => (
+                <li className="list-group-item">
+                  <a href={`categories/${subcat}`} className="mx-2">
+                    {subcat}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       ))}
-    </ul>
+    </Page>
   );
 }
 
