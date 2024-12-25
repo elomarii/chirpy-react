@@ -10,15 +10,13 @@ import Post from "./pages/Post.tsx";
 import Blog from "./pages/Blog.tsx";
 import Projects from "./pages/Projects.tsx";
 import { readMarkdown } from "./utils.tsx";
+import Category from "./pages/Category.tsx";
 
 // Define all routes and respective components
-const articles = import.meta.glob([
-  "/public/posts/*.md",
-  "/public/projects/*.md",
-]);
+const files = import.meta.glob(["/public/posts/*.md", "/public/projects/*.md"]);
 
 // Routes for articles
-const articlesRoutes = Object.keys(articles).map((filepath, _index) => {
+const articlesRoutes = Object.keys(files).map((filepath, _index) => {
   const path = filepath.replace("/public", "");
   return {
     path: path.replace(".md", ""),
@@ -28,8 +26,8 @@ const articlesRoutes = Object.keys(articles).map((filepath, _index) => {
 
 // Routes for categories
 const fetchCategories = async () => {
-  const fmatters = await Promise.all(
-    Object.keys(articles).map((path) =>
+  const articles = await Promise.all(
+    Object.keys(files).map((path) =>
       fetch(path.replace("/public", ""))
         .then((response) => response.text())
         .then((text) => {
@@ -38,14 +36,14 @@ const fetchCategories = async () => {
             title: fm.title,
             categories: fm.categories,
             date: fm.date,
-            path: path,
+            path: path.replace("/public", "").replace(".md", ""),
           };
         })
     )
   );
   let catList: string[] = [];
   const categories = new Map();
-  fmatters.map((fm) => {
+  articles.map((fm) => {
     catList = catList.concat(fm.categories);
     categories.set(
       fm.categories[0],
@@ -55,15 +53,15 @@ const fetchCategories = async () => {
     );
   });
   catList = [...new Set(catList)];
-  return { categories, catList, fmatters };
+  return { categories, catList, articles };
 };
 
-export const { categories, catList, fmatters } = await fetchCategories();
+export const { categories, catList, articles } = await fetchCategories();
 
 const categoriesRoutes = catList.map((cat, _index) => {
   return {
-    path: `/categories/${cat}`,
-    element: <h1>{cat}</h1>,
+    path: `/categories/${cat.replace(" ", "-").toLowerCase()}`,
+    element: <Category name={cat} />,
   };
 });
 

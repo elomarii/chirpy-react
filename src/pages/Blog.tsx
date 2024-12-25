@@ -12,7 +12,10 @@ function Blog() {
             className="card-header d-flex justify-content-between hide-border-bottom"
           >
             <span className="ms-2">
-              <a href={`/${key}`} className="mx-2">
+              <a
+                href={`/categories/${key.replace(" ", "-").toLowerCase()}`}
+                className="mx-2"
+              >
                 {key}
               </a>
             </span>
@@ -21,7 +24,12 @@ function Blog() {
             <ul className="list-group">
               {[...categories?.get(key)].map((subcat) => (
                 <li className="list-group-item">
-                  <a href={`categories/${subcat}`} className="mx-2">
+                  <a
+                    href={`/categories/${subcat
+                      .replace(" ", "-")
+                      .toLowerCase()}`}
+                    className="mx-2"
+                  >
                     {subcat}
                   </a>
                 </li>
