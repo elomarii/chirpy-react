@@ -18,21 +18,16 @@ function ProjectCard({
   image,
 }: Props) {
   return (
-    <>
-      <div className="card" style={{ margin: "10px", padding: 0 }}>
-        <a
-          href={path}
-          style={{
-            textDecoration: "inherit",
-            color: "inherit",
-          }}
-        >
+    <div className="col-12 col-md-6 col-lg-4 d-flex">
+      <article className="card-wrapper card">
+        <a href={path} className="post-preview">
           <div
+            className="image-wrapper"
             style={{
-              backgroundColor: image ? "" : "cyan",
+              backgroundColor: image ? "" : "brown",
               minWidth: "-webkit-fill-available",
               height: "3em",
-              marginTop: "0.2em",
+              marginTop: "1em",
             }}
           >
             {image ? (
@@ -42,20 +37,22 @@ function ProjectCard({
                 className="card-img-top"
                 style={{ height: "100%" }}
               />
-            ) : null}
+            ) : null}{" "}
           </div>
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
-            <h6 className="card-subtitle mb-2 text-body-secondary">
-              {description}
-            </h6>
-            <p className="card-text">{`${date} | ${listToString(
-              categories
-            )}`}</p>
+            <div className="card-text content mt-0 mb-3">
+              <p>{description}</p>
+            </div>
+            <div className="post-meta flex-grow-1 d-flex align-items-end">
+              <div className="me-auto">
+                <span>{`${date} | ${listToString(categories)}`}</span>
+              </div>
+            </div>
           </div>
         </a>
-      </div>
-    </>
+      </article>
+    </div>
   );
 }
 
