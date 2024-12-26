@@ -1,61 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BlogCard from "../components/BlogCard";
 import Pagination from "../components/Pagination";
-import { readMarkdown } from "../utils";
-
-interface FrontMatter {
-  [key: string]: any;
-}
+import { posts } from "../main";
 
 export default function Home() {
   const [page, setPage] = useState(0);
-  const [fmatters, setFmatters] = useState<FrontMatter[]>([]);
-
+  const postsCount = posts.length;
   const articlePerPage = 5;
-  const articles = Object.keys(
-    import.meta.glob(["/public/posts/*.md", "/public/projects/*.md"])
-  )
-    .reverse()
-    .map((filepath, _index) => filepath.replace("/public", ""));
-
-  const pagesCount: number = Math.ceil(articles.length / articlePerPage);
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      const start = page * articlePerPage;
-      const end = Math.min(articles.length, start + articlePerPage);
-      const currentArticles = articles.slice(start, end);
-
-      const fetchedMatters = await Promise.all(
-        currentArticles.map(async (art) => {
-          const response = await fetch(art);
-          const text = await response.text();
-          const frontMatter = { ...readMarkdown(text).frontMatter, path: art };
-          return frontMatter;
-        })
-      );
-
-      setFmatters(fetchedMatters);
-    };
-
-    fetchArticles();
-  }, [page]);
+  const pagesCount: number = Math.ceil(postsCount / articlePerPage);
 
   return (
     <>
       <div id="post-list" className="flex-grow-1 px-xl-1">
-        {fmatters.map((fmatter) => {
-          return (
-            <BlogCard
-              title={fmatter.title}
-              path={fmatter.path.replace(".md", "")}
-              description={fmatter.description}
-              categories={fmatter.categories}
-              date={fmatter.date}
-              image={fmatter.image}
-            />
-          );
-        })}
+        {posts
+          .slice(
+            page * articlePerPage,
+            Math.min((page + 1) * articlePerPage, postsCount)
+          )
+          .map((post) => {
+            return (
+              <BlogCard
+                title={post.title}
+                path={post.path.replace(".md", "")}
+                description={post.description}
+                categories={post.categories}
+                date={post.date}
+                image={post.image}
+              />
+            );
+          })}
       </div>
       <Pagination
         currentPage={page}

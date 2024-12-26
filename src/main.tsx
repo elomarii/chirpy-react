@@ -13,10 +13,12 @@ import { readMarkdown } from "./utils.tsx";
 import Category from "./pages/Category.tsx";
 
 // Define all routes and respective components
-const files = import.meta.glob(["/public/posts/*.md", "/public/projects/*.md"]);
+const projectFiles = Object.keys(import.meta.glob("/public/projects/*.md"));
+const postFiles = Object.keys(import.meta.glob("/public/posts/*.md"));
+const files = postFiles.concat(projectFiles);
 
 // Routes for articles
-const articlesRoutes = Object.keys(files).map((filepath, _index) => {
+const articlesRoutes = files.map((filepath, _index) => {
   const path = filepath.replace("/public", "");
   return {
     path: path.replace(".md", ""),
@@ -24,10 +26,9 @@ const articlesRoutes = Object.keys(files).map((filepath, _index) => {
   };
 });
 
-// Routes for categories
-const fetchCategories = async () => {
-  const articles = await Promise.all(
-    Object.keys(files).map((path) =>
+async function readFiles(files: string[]) {
+  return await Promise.all(
+    files.map((path) =>
       fetch(path.replace("/public", ""))
         .then((response) => response.text())
         .then((text) => {
@@ -35,15 +36,23 @@ const fetchCategories = async () => {
           return {
             title: fm.title,
             categories: fm.categories,
+            description: fm.description,
+            image: fm.image,
             date: fm.date,
             path: path.replace("/public", "").replace(".md", ""),
           };
         })
     )
   );
+}
+
+// Routes for categories
+const fetchCategories = async () => {
+  const posts = await readFiles(postFiles);
+  const projects = await readFiles(projectFiles);
   let catList: string[] = [];
   const categories = new Map();
-  articles.map((fm) => {
+  posts.concat(projects).map((fm) => {
     catList = catList.concat(fm.categories);
     categories.set(
       fm.categories[0],
@@ -53,10 +62,10 @@ const fetchCategories = async () => {
     );
   });
   catList = [...new Set(catList)];
-  return { categories, catList, articles };
+  return { categories, catList, posts, projects };
 };
 
-export const { categories, catList, articles } = await fetchCategories();
+export const { categories, catList, posts, projects } = await fetchCategories();
 
 const categoriesRoutes = catList.map((cat, _index) => {
   return {

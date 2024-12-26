@@ -1,5 +1,5 @@
 import Page from "./Page";
-import { articles } from "../main";
+import { posts } from "../main";
 
 interface Props {
   name: string;
@@ -9,15 +9,13 @@ function Category({ name }: Props) {
   return (
     <Page title={name}>
       <ul className="content ps-0">
-        {articles
-          .filter((article) => article.categories.includes(name))
-          .map((article) => (
+        {posts
+          .filter((post) => post.categories.includes(name))
+          .map((post) => (
             <li className="d-flex justify-content-between px-md-3">
-              <a href={article.path}>{article.title}</a>
+              <a href={post.path}>{post.title}</a>
               <span className="dash flex-grow-1"></span>
-              <time className="text-muted small text-nowrap">
-                {article.date}
-              </time>
+              <time className="text-muted small text-nowrap">{post.date}</time>
             </li>
           ))}
       </ul>
