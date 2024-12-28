@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { site } from "../globals";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 function TopBar() {
   const [navbarState, setNavbarState] = useState(false);
@@ -39,13 +41,11 @@ function TopBar() {
           onClick={navbarHandler}
           className="btn btn-link"
         >
-          {/* TODO */}
-          icon
+          <FontAwesomeIcon icon={faBars} color="gray" />
         </button>
 
         <div id="topbar-title">{getTitle()}</div>
-        {/* TODO */}
-        <div>icon</div>
+        <FontAwesomeIcon icon={faGlobe} color="gray" />
       </div>
     </header>
   );
