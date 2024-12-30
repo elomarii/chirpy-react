@@ -1,7 +1,7 @@
-import MdRenderer from "../components/MdRenderer";
+import Post from "./Post";
 
 function Whoami() {
-  return <MdRenderer path="/blog/tabs/whoami.md" />;
+  return <Post path="/blog/tabs/whoami.md" />;
 }
 
 export default Whoami;
