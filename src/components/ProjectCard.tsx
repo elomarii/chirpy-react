@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { listToString } from "../utils";
+import { faCalendarAlt, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   title: string;
@@ -46,7 +48,17 @@ function ProjectCard({
             </div>
             <div className="post-meta flex-grow-1 d-flex align-items-end">
               <div className="me-auto">
-                <span>{`${date} | ${listToString(categories)}`}</span>
+                <span>
+                  <FontAwesomeIcon icon={faFolderOpen} />{" "}
+                  {`${listToString(categories)}`}
+                </span>
+              </div>
+            </div>
+            <div className="post-meta flex-grow-1 d-flex align-items-end">
+              <div className="me-auto">
+                <span>
+                  <FontAwesomeIcon icon={faCalendarAlt} /> {` ${date}`}
+                </span>
               </div>
             </div>
           </div>

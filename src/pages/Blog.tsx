@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { categories } from "../main";
 import Page from "./Page";
+import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 
 function Blog() {
   // get all root categories
@@ -16,7 +18,8 @@ function Blog() {
                 href={`/categories/${key.replace(" ", "-").toLowerCase()}`}
                 className="mx-2"
               >
-                {key}
+                <FontAwesomeIcon icon={faFolderOpen} />
+                {` ${key}`}
               </a>
             </span>
           </div>

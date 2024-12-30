@@ -1,8 +1,21 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { site } from "../globals";
+import {
+  faBarsProgress,
+  faChessRook,
+  faHome,
+  faNewspaper,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const path = window.location.pathname;
   const tabs: string[] = ["BLOG", "PROJECTS", "WHOAMI"];
+  const tabsIcons: IconDefinition[] = [
+    faNewspaper,
+    faBarsProgress,
+    faChessRook,
+  ];
 
   return (
     <aside
@@ -24,6 +37,7 @@ function NavBar() {
         <ul className="nav">
           <li className={path == "/" ? "nav-item active" : "nav-item"}>
             <a className="nav-link" aria-current="page" key="home" href="/">
+              <FontAwesomeIcon className="fa-fw" icon={faHome} />
               <span>HOME</span>
             </a>
           </li>
@@ -37,6 +51,7 @@ function NavBar() {
                   key={index}
                   href={`/${tab.toLowerCase()}`}
                 >
+                  <FontAwesomeIcon className="fa-fw" icon={tabsIcons[index]} />
                   <span>{tab}</span>
                 </a>
               </li>
