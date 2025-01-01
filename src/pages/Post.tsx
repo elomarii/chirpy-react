@@ -29,7 +29,38 @@ function Post({ path }: Props) {
       <header>
         <h1 data-doc-skip>{frontMatter.title}</h1>
         <p className="post-desc fw-light mb-4">{frontMatter.description}</p>
+        <div className="post-meta text-muted">
+          <div className="d-flex justify-content-between">
+            <span>
+              Posted on
+              <em> {new Date(frontMatter.date).toDateString()}</em>
+            </span>
+            <div>
+              <span
+                className="readtime"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title={content.split(" ").length.toString()}
+              >
+                <em>{Math.floor(content.split(" ").length / 180)} min </em>
+                read
+              </span>
+            </div>
+          </div>
+        </div>
       </header>
+      <hr />
+      {frontMatter.banner ? (
+        <img
+          className="post-banner"
+          title="banner"
+          alt="banner"
+          src={frontMatter.banner}
+        />
+      ) : (
+        <></>
+      )}
+      <hr />
       <Markdown
         className="content"
         remarkPlugins={[remarkGfm]}

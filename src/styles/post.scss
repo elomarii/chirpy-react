@@ -44,6 +44,13 @@ header {
   }
 }
 
+.post-banner {
+  display: block;
+  width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+}
+
 .post-tail-wrapper {
   @extend %text-sm;
 
