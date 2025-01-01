@@ -28,7 +28,9 @@ function NavBar() {
         <a href="/" id="avatar" className="rounded-circle">
           <img src={site.avatar} width="112" height="112" alt="avatar" />
         </a>
-        <h1 className="site-title">{site.name}</h1>
+        <h1 className="site-title">
+          <a href="/whoami">{site.name}</a>
+        </h1>
         <p className="site-subtitle fst-italic mb-0">{site.description}</p>
       </header>
 
