@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { site } from "../globals";
+import { site, socials } from "../globals";
 import {
   faBarsProgress,
   faChessRook,
@@ -61,6 +61,19 @@ function NavBar() {
           })}
         </ul>
       </nav>
+
+      {/* Socials */}
+      <div className="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+        <a href={`https://github.com/${socials.github}`} aria-label="github">
+          <img src="/src/assets/github.svg" alt="github" />
+        </a>
+        <a
+          href={`https://linkedin.com/in/${socials.linkedin}`}
+          aria-label="linkedin"
+        >
+          <img src="/src/assets/linkedin.svg" alt="github" />
+        </a>
+      </div>
     </aside>
   );
 }

@@ -8,7 +8,6 @@ export const socials = {
   name: "Ibrahim El Omari",
   github: "elomarii",
   linkedin: "ibrahim-el-omari",
-  email: "",
 };
 
 export const copyright = {

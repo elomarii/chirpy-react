@@ -875,11 +875,13 @@ $btn-mb: 0.5rem;
       &:not(:last-child) {
         margin-right: $sb-btn-gap;
       }
+      
+      img {
+        height: 70%;
+        line-height: $btn-size;
+      }
     }
 
-    i {
-      line-height: $btn-size;
-    }
 
     #mode-toggle {
       @extend %button;
