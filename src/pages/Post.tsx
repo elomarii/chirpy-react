@@ -8,11 +8,13 @@ import rehypeRaw from "rehype-raw";
 
 interface Props {
   path: string;
+  showHeader?: boolean;
 }
 
-function Post({ path }: Props) {
+function Post({ path, showHeader = true }: Props) {
   const [content, setContent] = useState("");
   const [frontMatter, setFrontMatter] = useState(Object);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(path)
@@ -21,46 +23,53 @@ function Post({ path }: Props) {
         const { frontMatter, content } = readMarkdown(text);
         setContent(content);
         setFrontMatter(frontMatter);
+        setLoading(false);
       });
   }, []);
 
   return (
     <article className="x-1">
-      <header>
-        <h1 data-doc-skip>{frontMatter.title}</h1>
-        <p className="post-desc fw-light mb-4">{frontMatter.description}</p>
-        <div className="post-meta text-muted">
-          <div className="d-flex justify-content-between">
-            <span>
-              Posted on
-              <em> {new Date(frontMatter.date).toDateString()}</em>
-            </span>
-            <div>
-              <span
-                className="readtime"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title={content.split(" ").length.toString()}
-              >
-                <em>{Math.floor(content.split(" ").length / 180)} min </em>
-                read
-              </span>
+      {showHeader && !loading ? (
+        <>
+          <header>
+            <h1 data-doc-skip>{frontMatter.title}</h1>
+            <p className="post-desc fw-light mb-4">{frontMatter.description}</p>
+            <div className="post-meta text-muted">
+              <div className="d-flex justify-content-between">
+                <span>
+                  Posted on
+                  <em> {new Date(frontMatter.date).toDateString()}</em>
+                </span>
+                <div>
+                  <span
+                    className="readtime"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title={content.split(" ").length.toString()}
+                  >
+                    <em>{Math.floor(content.split(" ").length / 180)} min </em>
+                    read
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </header>
-      <hr />
-      {frontMatter.banner ? (
-        <img
-          className="post-banner"
-          title="banner"
-          alt="banner"
-          src={frontMatter.banner}
-        />
+          </header>
+          <hr />
+          {frontMatter.banner ? (
+            <img
+              className="post-banner"
+              title="banner"
+              alt="banner"
+              src={frontMatter.banner}
+            />
+          ) : (
+            <></>
+          )}
+          <hr />
+        </>
       ) : (
         <></>
       )}
-      <hr />
       <Markdown
         className="content"
         remarkPlugins={[remarkGfm]}

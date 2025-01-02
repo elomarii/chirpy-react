@@ -13,8 +13,10 @@ import { readMarkdown } from "./utils.tsx";
 import Category from "./pages/Category.tsx";
 
 // Define all routes and respective components
-const projectFiles = Object.keys(import.meta.glob("/public/projects/*.md"));
-const postFiles = Object.keys(import.meta.glob("/public/posts/*.md"));
+const projectFiles = Object.keys(
+  import.meta.glob("/public/projects/*.md")
+).reverse();
+const postFiles = Object.keys(import.meta.glob("/public/posts/*.md")).reverse();
 const files = postFiles.concat(projectFiles);
 
 // Routes for articles

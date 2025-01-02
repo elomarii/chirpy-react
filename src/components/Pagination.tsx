@@ -1,3 +1,5 @@
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {
@@ -20,7 +22,7 @@ function pagination({ currentPage, pagesCount, setPage }: Props) {
             href="#"
             onClick={() => setPage(currentPage - 1)}
           >
-            <span aria-hidden="true">&laquo;</span>
+            <FontAwesomeIcon icon={faAngleLeft} />
           </a>
         </li>
         {Array.from({ length: pagesCount }, (_, i) => (
@@ -42,7 +44,7 @@ function pagination({ currentPage, pagesCount, setPage }: Props) {
             onClick={() => setPage(currentPage + 1)}
             aria-label="Next"
           >
-            <span aria-hidden="true">&raquo;</span>
+            <FontAwesomeIcon icon={faAngleRight} />
           </a>
         </li>
       </ul>

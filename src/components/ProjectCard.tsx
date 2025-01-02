@@ -20,36 +20,28 @@ function ProjectCard({
   image,
 }: Props) {
   return (
-    <div className="col-12 col-md-6 col-lg-4 d-flex">
+    <div className="col-12 col-md-6 col-lg-6 d-flex">
       <article className="card-wrapper card">
         <a href={path} className="post-preview">
-          <div
-            className="image-wrapper"
-            style={{
-              backgroundColor: image ? "" : "brown",
-              minWidth: "-webkit-fill-available",
-              height: "3em",
-              marginTop: "1em",
-            }}
-          >
+          <div className="image-wrapper">
             {image ? (
-              <img
-                src={image}
-                alt={title}
-                className="card-img-top"
-                style={{ height: "100%" }}
-              />
-            ) : null}{" "}
+              <img src={image} alt={title} className="project-thumb" />
+            ) : (
+              <div className="filler" />
+            )}
           </div>
           <div className="card-body">
-            <h5 className="card-title">{title}</h5>
+            <h5 className="card-title mt-2">{title}</h5>
             <div className="card-text content mt-0 mb-3">
               <p>{description}</p>
             </div>
             <div className="post-meta flex-grow-1 d-flex align-items-end">
               <div className="me-auto">
                 <span>
-                  <FontAwesomeIcon icon={faFolderOpen} />{" "}
+                  <FontAwesomeIcon
+                    icon={faFolderOpen}
+                    style={{ width: "1.5em" }}
+                  />{" "}
                   {`${listToString(categories)}`}
                 </span>
               </div>
@@ -57,7 +49,11 @@ function ProjectCard({
             <div className="post-meta flex-grow-1 d-flex align-items-end">
               <div className="me-auto">
                 <span>
-                  <FontAwesomeIcon icon={faCalendarAlt} /> {` ${date}`}
+                  <FontAwesomeIcon
+                    icon={faCalendarAlt}
+                    style={{ width: "1.5em" }}
+                  />{" "}
+                  {` ${date}`}
                 </span>
               </div>
             </div>
