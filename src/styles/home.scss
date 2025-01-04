@@ -22,13 +22,12 @@
       %img-radius {
         border-radius: $base-radius $base-radius 0 0;
       }
-  
-      .preview-img {
+      
+      img {
+        display: block;
+        justify-self: center;
         @extend %img-radius;
-  
-        img {
-          @extend %img-radius;
-        }
+        max-height: 160px;
       }
   
       .card-body {
