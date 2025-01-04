@@ -2,9 +2,15 @@ import { useEffect, useState } from "react";
 import { readMarkdown } from "../utils";
 import Markdown from "react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCode,
+  faFileCode,
+  faTerminal,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   path: string;
@@ -47,7 +53,10 @@ function Post({ path, showHeader = true }: Props) {
                     data-bs-placement="bottom"
                     title={content.split(" ").length.toString()}
                   >
-                    <em>{Math.floor(content.split(" ").length / 180)} min </em>
+                    <em>
+                      {Math.max(Math.floor(content.split(" ").length / 180), 1)}{" "}
+                      min{" "}
+                    </em>
                     read
                   </span>
                 </div>
@@ -80,23 +89,41 @@ function Post({ path, showHeader = true }: Props) {
               <table>{children}</table>
             </div>
           ),
-          code: ({ className, children, ...props }) => {
-            // custom data passed to code element is stored in the data attribute
-            // example: ```c file="go.c" => data = 'file="go.c"'
-            // const data = props.node?.data?.meta
-            const match = /language-(\w+)/.exec(className || "");
-            return props.node?.position?.start.line ===
-              props.node?.position?.end.line ? (
-              <code className={className} {...props}>
-                {children}
-              </code>
+          code: ({ node, className, children }) => {
+            const lista = className?.split(",") ?? [];
+            const title =
+              lista.length === 1
+                ? "Code"
+                : lista.length > 1
+                ? lista[1]
+                : "Terminal";
+            return node?.position?.start.line === node?.position?.end.line ? (
+              <code className={className}>{children}</code>
             ) : (
-              <SyntaxHighlighter
-                language={match ? match[1] : "language-txt"}
-                style={darcula}
-              >
-                {String(children).replace(/\n$/, "")}
-              </SyntaxHighlighter>
+              <div>
+                <div className="code-header">
+                  <div className="buttons" />
+                  <FontAwesomeIcon
+                    icon={
+                      lista.length === 0
+                        ? faTerminal
+                        : lista.length === 1
+                        ? faCode
+                        : faFileCode
+                    }
+                  />
+                  {title}
+                </div>
+                <SyntaxHighlighter
+                  language={lista[0]}
+                  style={atomOneDark}
+                  showLineNumbers={title === "Terminal" ? false : true}
+                  codeTagProps={{ className: "code-block" }}
+                  customStyle={{ borderRadius: "0 0 6px 6px" }}
+                >
+                  {String(children).replace(/\n$/, "")}
+                </SyntaxHighlighter>
+              </div>
             );
           },
         }}

@@ -1,0 +1,31 @@
+.code-block {
+    font-size: medium;
+}
+
+.code-header {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--mask-bg);
+    color: var(--text-color);
+    border-radius: 5px 5px 0 0;
+    padding: 2px 0 2px 0;
+    height: auto;
+    position: relative;
+    
+    svg {
+        margin: 5px 5px 0 0;
+    }
+
+    .buttons {
+        display: block;
+        position: absolute;
+        top: 35%;
+        left: 1em;
+        width: 0.6em;
+        height: 0.6em;
+        border-radius: 50%;
+        background-color: #f44;
+        box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
+      }
+}
