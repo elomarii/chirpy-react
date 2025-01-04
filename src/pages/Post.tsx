@@ -92,13 +92,9 @@ function Post({ path, showHeader = true }: Props) {
           code: ({ node, className, children }) => {
             const lista = className?.split(",") ?? [];
             const title =
-              lista.length === 1
-                ? "Code"
-                : lista.length > 1
-                ? lista[1]
-                : "Terminal";
+              lista.length === 1 ? "Code" : lista.length > 1 ? lista[1] : "";
             return node?.position?.start.line === node?.position?.end.line ? (
-              <code className={className}>{children}</code>
+              <code className="inline-code">{children}</code>
             ) : (
               <div>
                 <div className="code-header">
@@ -117,7 +113,7 @@ function Post({ path, showHeader = true }: Props) {
                 <SyntaxHighlighter
                   language={lista[0]}
                   style={atomOneDark}
-                  showLineNumbers={title === "Terminal" ? false : true}
+                  showLineNumbers={title === "" ? false : true}
                   codeTagProps={{ className: "code-block" }}
                   customStyle={{ borderRadius: "0 0 6px 6px" }}
                 >

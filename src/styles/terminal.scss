@@ -1,3 +1,10 @@
+.inline-code {
+    font-size: medium;
+    font-weight: 500;
+    color: yellow;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .code-block {
     font-size: medium;
 }
@@ -14,7 +21,7 @@
     position: relative;
     
     svg {
-        margin: 5px 5px 0 0;
+        margin: 5px 5px 5px 0;
     }
 
     .buttons {
