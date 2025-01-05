@@ -76,25 +76,23 @@ const categoriesRoutes = catList.map((cat, _index) => {
   };
 });
 
-const prefix = "/react-blog";
-
 // Router
 const router = createBrowserRouter([
   {
-    path: prefix + "/",
+    path: "/",
     element: <Home />,
     errorElement: <NotFound />,
   },
   {
-    path: prefix + "/blog",
+    path: "/blog",
     element: <Blog />,
   },
   {
-    path: prefix + "/projects",
+    path: "/projects",
     element: <Projects />,
   },
   {
-    path: prefix + "/whoami",
+    path: "/whoami",
     element: <Whoami />,
   },
   ...articlesRoutes,
