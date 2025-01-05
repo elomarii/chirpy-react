@@ -46,7 +46,11 @@ function NavBar() {
           {tabs.map((tab, index) => {
             return (
               <li
-                className={path == `/${tab}` ? "nav-item active" : "nav-item"}
+                className={
+                  path == `/${tab.toLocaleLowerCase()}`
+                    ? "nav-item active"
+                    : "nav-item"
+                }
               >
                 <a
                   className="nav-link"
@@ -71,7 +75,7 @@ function NavBar() {
           href={`https://linkedin.com/in/${socials.linkedin}`}
           aria-label="linkedin"
         >
-          <img src="/src/assets/linkedin.svg" alt="github" />
+          <img src="/src/assets/linkedin.svg" alt="linkedin" />
         </a>
       </div>
     </aside>

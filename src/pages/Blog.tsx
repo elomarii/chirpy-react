@@ -2,12 +2,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { categories } from "../main";
 import Page from "./Page";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
+import AsciiArt from "../components/AsciiArt";
+import { artBlog } from "../globals";
 
 function Blog() {
-  // get all root categories
-  return (
+  const cats: string[] = Array.from(categories?.keys() ?? []);
+  return cats.length == 0 ? (
+    <AsciiArt art={artBlog} />
+  ) : (
     <Page title="Blog categories">
-      {Array.from(categories?.keys() ?? []).map((key, index) => (
+      {cats.map((key, index) => (
         <div className="card categories">
           <div
             id={`h_${index}`}
