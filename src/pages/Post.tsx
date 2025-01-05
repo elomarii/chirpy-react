@@ -115,7 +115,10 @@ function Post({ path, showHeader = true }: Props) {
                   style={atomOneDark}
                   showLineNumbers={title === "" ? false : true}
                   codeTagProps={{ className: "code-block" }}
-                  customStyle={{ borderRadius: "0 0 6px 6px" }}
+                  customStyle={{
+                    borderRadius: "0 0 10px 10px",
+                    backgroundColor: "var(--mask-bg)",
+                  }}
                 >
                   {String(children).replace(/\n$/, "")}
                 </SyntaxHighlighter>
