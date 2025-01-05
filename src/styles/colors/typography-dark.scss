@@ -1,21 +1,34 @@
 /*
  * The main dark mode styles
+ 0d1b2a
+ 1b263b
+ 415a77
+ 778da9
+ e0e1dd
  */
 
 @mixin dark-scheme {
-  /* Framework color */
-  --main-bg: rgb(27, 27, 30);
-  --mask-bg: rgb(68, 69, 70);
-  --main-border-color: rgb(44, 45, 45);
+  /* Color palette */
+  --main: #1b263b;
+  --main-dark: #0d1b2a;
+  --main-light: #415a77;
+  --secondary-dark: #778da9;
+  --secondary-light: #e0e1dd;
+  --secondary-text: #c1d2e8;
+
+  /* Framework color: derived from the palette above */
+  --main-bg: #0f2237;
+  --mask-bg: #09141f;
+  --main-border-color: var(--main-light);
 
   /* Common color */
-  --text-color: rgb(175, 176, 177);
-  --text-muted-color: #868686;
+  --text-color: var(--secondary-text);
+  --text-muted-color: var(--secondary-dark);
   --text-muted-hightlight-color: #aeaeae;
   --heading-color: #cccccc;
   --label-color: #a7a7a7;
-  --blockquote-border-color: rgb(66, 66, 66);
-  --blockquote-text-color: #868686;
+  --blockquote-border-color: var(--main-dark);
+  --blockquote-text-color: var(--secondary-dark);
   --link-color: rgb(138, 180, 248);
   --link-underline-color: rgb(82, 108, 150);
   --button-bg: #1e1e1e;
@@ -23,7 +36,7 @@
   --btn-backtotop-color: var(--text-color);
   --btn-backtotop-border-color: #212122;
   --btn-box-shadow: var(--main-bg);
-  --card-header-bg: #292929;
+  --card-header-bg: var(--main-dark);
   --checkbox-color: rgb(118, 120, 121);
   --checkbox-checked-color: var(--link-color);
   --img-bg: radial-gradient(circle, rgb(22, 22, 24) 0%, rgb(32, 32, 32) 100%);
@@ -35,20 +48,20 @@
   );
 
   /* Sidebar */
-  --site-title-color: #717070;
-  --site-subtitle-color: #868686;
-  --sidebar-bg: #1e1e1e;
-  --sidebar-border-color: #292929;
+  --site-title-color: var(--secondary-light);
+  --site-subtitle-color: var(--secondary-dark);
+  --sidebar-bg: var(--main-dark);
+  --sidebar-border-color: var(--main-light);
   --sidebar-muted-color: #868686;
-  --sidebar-active-color: rgb(255, 255, 255, 0.95);
-  --sidebar-hover-bg: #262626;
+  --sidebar-active-color: var(--secondary-text);
+  --sidebar-hover-bg: var(--main);
   --sidebar-btn-bg: #232328;
   --sidebar-btn-color: #787878;
-  --avatar-border-color: rgb(206, 206, 206, 0.9);
+  --avatar-border-color: var(--secondary-dark);
 
   /* Topbar */
-  --topbar-bg: rgb(27, 27, 30, 0.64);
-  --topbar-text-color: var(--text-color);
+  --topbar-bg: var(--main-bg);
+  --topbar-text-color: var(--secondary-dark);
   --search-border-color: rgb(55, 55, 55);
   --search-icon-color: rgb(100, 102, 105);
   --input-focus-border-color: rgb(112, 114, 115);
@@ -67,7 +80,7 @@
   --footnote-target-bg: rgb(63, 81, 181);
   --btn-share-color: #6c757d;
   --btn-share-hover-color: #bfc1ca;
-  --card-bg: #1e1e1e;
+  --card-bg: var(--main);
   --card-hovor-bg: #464d51;
   --card-shadow: rgb(21, 21, 21, 0.72) 0 6px 18px 0,
     rgb(137, 135, 135, 0.24) 0 0 0 1px;
@@ -91,7 +104,7 @@
   --search-tag-bg: #292828;
 
   /* categories */
-  --categories-border: rgb(64, 66, 69, 0.5);
+  --categories-border: var(--main-light);
   --categories-hover-bg: rgb(73, 75, 76);
   --categories-icon-hover-color: white;
 
