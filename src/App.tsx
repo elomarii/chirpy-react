@@ -3,8 +3,13 @@ import Footer from "./components/Footer";
 import TopBar from "./components/Topbar";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
+import { useDispatch } from "react-redux";
+import { loadAsync } from "./state/reducerSitedata";
+import { AppDispatch } from "./state/store";
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>();
+  dispatch(loadAsync());
   return (
     <>
       {/* NAVBAR */}
