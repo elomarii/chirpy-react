@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Pagination from "../components/Pagination";
 import ProjectCard from "../components/ProjectCard";
-import { projects } from "../main";
 import AsciiArt from "../components/AsciiArt";
 import { artProject } from "../globals";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 
 export default function Projects() {
+  const projects = useSelector((state: RootState) => state.sitedata.projects);
   const [page, setPage] = useState(0);
   const projectsCount: number = projects.length;
   const articlePerPage: number = 12;

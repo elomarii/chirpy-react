@@ -1,17 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { categories } from "../main";
 import Page from "./Page";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import AsciiArt from "../components/AsciiArt";
 import { artBlog } from "../globals";
+import { RootState } from "../state/store";
+import { useSelector } from "react-redux";
 
 function Blog() {
-  const cats: string[] = Array.from(categories?.keys() ?? []);
-  return cats.length == 0 ? (
+  const categories = useSelector(
+    (state: RootState) => state.sitedata.categories
+  );
+  return categories.length == 0 ? (
     <AsciiArt art={artBlog} />
   ) : (
     <Page title="Blog categories">
-      {cats.map((key, index) => (
+      {categories.map((listing, index) => (
         <div className="card categories">
           <div
             id={`h_${index}`}
@@ -19,17 +22,19 @@ function Blog() {
           >
             <span className="ms-2">
               <a
-                href={`/categories/${key.replace(" ", "-").toLowerCase()}`}
+                href={`/categories/${listing.parent
+                  .replace(" ", "-")
+                  .toLowerCase()}`}
                 className="mx-2"
               >
                 <FontAwesomeIcon icon={faFolderOpen} />
-                {` ${key}`}
+                {` ${listing.parent}`}
               </a>
             </span>
           </div>
-          <div id={key} className="shadow">
+          <div id={listing.parent} className="shadow">
             <ul className="list-group">
-              {[...categories?.get(key)].map((subcat) => (
+              {listing.children.map((subcat) => (
                 <li className="list-group-item">
                   <a
                     href={`/categories/${subcat

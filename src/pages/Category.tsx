@@ -1,8 +1,10 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 import Page from "./Page";
-import { posts } from "../main";
 import { useParams } from "react-router-dom";
 
 function Category() {
+  const posts = useSelector((state: RootState) => state.sitedata.posts);
   const { name } = useParams();
   const relevantPosts = posts.filter((post) =>
     post.categories

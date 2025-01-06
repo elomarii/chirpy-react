@@ -1,16 +1,17 @@
 import { useState } from "react";
 import BlogCard from "../components/BlogCard";
 import Pagination from "../components/Pagination";
-import { posts } from "../main";
 import AsciiArt from "../components/AsciiArt";
 import { artBlog } from "../globals";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 
 export default function Home() {
+  const posts = useSelector((state: RootState) => state.sitedata.posts);
   const [page, setPage] = useState(0);
   const postsCount: number = posts.length;
   const articlePerPage: number = 5;
   const pagesCount: number = Math.ceil(postsCount / articlePerPage);
-  console.log(postsCount);
 
   return (
     <>
