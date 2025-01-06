@@ -46,17 +46,14 @@ function NavBar() {
           {tabs.map((tab, index) => {
             return (
               <li
+                key={index}
                 className={
                   path == `/${tab.toLocaleLowerCase()}`
                     ? "nav-item active"
                     : "nav-item"
                 }
               >
-                <a
-                  className="nav-link"
-                  key={index}
-                  href={`/${tab.toLowerCase()}`}
-                >
+                <a className="nav-link" href={`/${tab.toLowerCase()}`}>
                   <FontAwesomeIcon className="fa-fw" icon={tabsIcons[index]} />
                   <span>{tab}</span>
                 </a>
