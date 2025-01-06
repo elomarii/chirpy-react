@@ -1,13 +1,10 @@
-import { ReactNode } from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import TopBar from "./components/Topbar";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
-interface Props {
-  children: ReactNode;
-}
-
-function App({ children }: Props) {
+function App() {
   return (
     <>
       {/* NAVBAR */}
@@ -21,7 +18,7 @@ function App({ children }: Props) {
               aria-label="Main Content"
               className="col-12 col-lg-11 col-xl-9 px-md-4"
             >
-              {children}
+              <RouterProvider router={router} />
             </main>
 
             {/* SIDEBAR */}

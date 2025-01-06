@@ -11,19 +11,20 @@ import {
   faFileCode,
   faTerminal,
 } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
 
 interface Props {
-  path: string;
   showHeader?: boolean;
 }
 
-function Post({ path, showHeader = true }: Props) {
+function Post({ showHeader = true }: Props) {
   const [content, setContent] = useState("");
   const [frontMatter, setFrontMatter] = useState(Object);
   const [loading, setLoading] = useState(true);
+  const { type, file } = useParams();
 
   useEffect(() => {
-    fetch(path)
+    fetch(`/${type}/${file}.md`)
       .then((response) => response.text())
       .then((text) => {
         const { frontMatter, content } = readMarkdown(text);
