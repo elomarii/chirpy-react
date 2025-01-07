@@ -15,7 +15,7 @@ function Blog() {
   ) : (
     <Page title="Blog categories">
       {categories.map((listing, index) => (
-        <div className="card categories">
+        <div className="card categories" key={index}>
           <div
             id={`h_${index}`}
             className="card-header d-flex justify-content-between hide-border-bottom"
@@ -35,7 +35,7 @@ function Blog() {
           <div id={listing.parent} className="shadow">
             <ul className="list-group">
               {listing.children.map((subcat) => (
-                <li className="list-group-item">
+                <li className="list-group-item" key={subcat}>
                   <a
                     href={`/categories/${subcat
                       .replace(" ", "-")

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { listToString } from "../utils";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 interface Props {
   title: string;
@@ -22,7 +23,7 @@ function BlogCard({
   return (
     <>
       <article className="card-wrapper card">
-        <a href={path} className="post-preview row g-0 flex-md-row-reverse">
+        <Link to={path} className="post-preview row g-0 flex-md-row-reverse">
           {image ? (
             <div className="col-md-5">
               <img src={image} />
@@ -48,7 +49,7 @@ function BlogCard({
               </div>
             </div>
           </div>
-        </a>
+        </Link>
       </article>
     </>
   );

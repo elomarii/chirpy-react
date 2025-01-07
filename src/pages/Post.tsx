@@ -65,9 +65,12 @@ function Post({ showHeader = true }: Props) {
                     const id = headerToId(children?.toString() ?? "");
                     return (
                       <h2 id={id}>
-                        <span>{children} </span>
+                        <span>{children}</span>
                         <a href={`#${id}`} className="anchor text-muted">
-                          <FontAwesomeIcon icon={faHashtag} />
+                          <FontAwesomeIcon
+                            icon={faHashtag}
+                            style={{ padding: "0 0.5em 0 0.5em" }}
+                          />
                         </a>
                       </h2>
                     );

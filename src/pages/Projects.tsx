@@ -25,7 +25,7 @@ export default function Projects() {
                 page * articlePerPage,
                 Math.min((page + 1) * articlePerPage, projectsCount)
               )
-              .map((fmatter) => {
+              .map((fmatter, index) => {
                 return (
                   <ProjectCard
                     title={fmatter.title}
@@ -34,6 +34,7 @@ export default function Projects() {
                     categories={fmatter.categories}
                     date={fmatter.date}
                     image={fmatter.image}
+                    key={index}
                   />
                 );
               })

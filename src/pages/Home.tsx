@@ -24,18 +24,17 @@ export default function Home() {
               page * articlePerPage,
               Math.min((page + 1) * articlePerPage, postsCount)
             )
-            .map((post) => {
-              return (
-                <BlogCard
-                  title={post.title}
-                  path={post.path.replace(".md", "")}
-                  description={post.description}
-                  categories={post.categories}
-                  date={post.date}
-                  image={post.image}
-                />
-              );
-            })
+            .map((post, index) => (
+              <BlogCard
+                title={post.title}
+                path={post.path.replace(".md", "")}
+                description={post.description}
+                categories={post.categories}
+                date={post.date}
+                image={post.image}
+                key={index}
+              />
+            ))
         )}
       </div>
       <Pagination
