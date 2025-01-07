@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { readMarkdown } from "../utils";
+import { headerToId, readMarkdown } from "../utils";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -8,6 +8,10 @@ import { RootState } from "../state/store";
 import NotFound from "./NotFound";
 import PostHeader from "../components/PostHeader";
 import CodeBlock from "../components/CodeBlock";
+import { useDispatch } from "react-redux";
+import { set } from "../state/reducerToc";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   showHeader?: boolean;
@@ -16,9 +20,12 @@ interface Props {
 function Post({ showHeader = true }: Props) {
   const [content, setContent] = useState("");
   const [frontMatter, setFrontMatter] = useState(Object);
-  const [loading, setLoading] = useState(true);
+  const [reading, setReading] = useState(true);
   const path = window.location.pathname;
+  const dispatch = useDispatch();
   const paths = useSelector((state: RootState) => state.sitedata.paths);
+  const loading = useSelector((state: RootState) => state.sitedata.loading);
+
   useEffect(() => {
     fetch(path + ".md")
       .then((response) => response.text())
@@ -26,14 +33,19 @@ function Post({ showHeader = true }: Props) {
         const { frontMatter, content } = readMarkdown(text);
         setContent(content);
         setFrontMatter(frontMatter);
-        setLoading(false);
-        // dispatch(set(["hello", "hi"]));
+        setReading(false);
+        const toc = Array.from(document.querySelectorAll(".content h2")).map(
+          (h2) => h2.children.item(0)?.textContent
+        );
+        if (toc.length > 0 && showHeader) {
+          dispatch(set(toc));
+        }
       });
-  }, []);
+  }, [loading]);
 
   return (
     <article className="x-1">
-      {!loading ? (
+      {!loading && !reading ? (
         <>
           {!(paths.includes(path) || path === "/whoami") ? (
             <NotFound />
@@ -49,6 +61,17 @@ function Post({ showHeader = true }: Props) {
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
                 components={{
+                  h2: ({ children }) => {
+                    const id = headerToId(children?.toString() ?? "");
+                    return (
+                      <h2 id={id}>
+                        <span>{children} </span>
+                        <a href={`#${id}`} className="anchor text-muted">
+                          <FontAwesomeIcon icon={faHashtag} />
+                        </a>
+                      </h2>
+                    );
+                  },
                   table: ({ children }) => (
                     <div className="table-wrapper">
                       <table>{children}</table>

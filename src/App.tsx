@@ -8,6 +8,7 @@ import { loadAsync } from "./state/reducerSitedata";
 import { AppDispatch } from "./state/store";
 import { useSelector } from "react-redux";
 import { RootState } from "./state/store";
+import Toc from "./components/Toc";
 
 function App() {
   const sitedata = useSelector((state: RootState) => state.sitedata.paths);
@@ -38,6 +39,7 @@ function App() {
               className="col-xl-3 ps-2 mb-5 text-muted"
             >
               <div className="access">
+                <Toc />
                 {/* {% include_cached update-list.html lang=lang %}
               {% include_cached trending-tags.html lang=lang %} */}
               </div>

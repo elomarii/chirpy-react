@@ -35,3 +35,7 @@ export function listToString(list: string[]): string {
   list.slice(1).map((element) => (result = `${result}, ${element}`));
   return result;
 }
+
+export function headerToId(header: string): string {
+  return header.toString().toLowerCase().replace(/\./g, "").replace(/\s/g, "-");
+}
