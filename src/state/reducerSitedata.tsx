@@ -7,6 +7,7 @@ const sitedataInitialState: SitedataState = {
   posts: [],
   projects: [],
   paths: [],
+  loading: true,
 };
 
 const sitedataSlice = createSlice({
@@ -19,6 +20,7 @@ const sitedataSlice = createSlice({
       state.posts = action.payload.posts;
       state.projects = action.payload.projects;
       state.paths = action.payload.paths;
+      state.loading = false;
     });
   },
 });

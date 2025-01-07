@@ -18,4 +18,5 @@ export interface SitedataState {
   posts: ArticleProps[];
   projects: ArticleProps[];
   paths: string[];
+  loading: boolean;
 }

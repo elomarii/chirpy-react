@@ -6,10 +6,15 @@ import router from "./router";
 import { useDispatch } from "react-redux";
 import { loadAsync } from "./state/reducerSitedata";
 import { AppDispatch } from "./state/store";
+import { useSelector } from "react-redux";
+import { RootState } from "./state/store";
 
 function App() {
-  const dispatch = useDispatch<AppDispatch>();
-  dispatch(loadAsync());
+  const sitedata = useSelector((state: RootState) => state.sitedata.paths);
+  if (sitedata.length === 0) {
+    const dispatch = useDispatch<AppDispatch>();
+    dispatch(loadAsync());
+  }
   return (
     <>
       {/* NAVBAR */}
