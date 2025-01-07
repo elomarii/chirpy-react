@@ -1,7 +1,7 @@
 import Post from "./Post";
 
 function Whoami() {
-  return <Post path="/whoami.md" showHeader={false} />;
+  return <Post showHeader={false} />;
 }
 
 export default Whoami;

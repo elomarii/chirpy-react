@@ -1,30 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { readMarkdown } from "../utils";
-
-interface ArticleProps {
-  title: any;
-  categories: any;
-  description: any;
-  image: any;
-  date: any;
-  path: string;
-}
-
-interface CategoryListing {
-  parent: string;
-  children: string[];
-}
-
-interface SitedataState {
-  categories: CategoryListing[];
-  posts: ArticleProps[];
-  projects: ArticleProps[];
-}
+import { CategoryListing, SitedataState } from "../interfaces";
 
 const sitedataInitialState: SitedataState = {
   categories: [],
   posts: [],
   projects: [],
+  paths: [],
 };
 
 const sitedataSlice = createSlice({
@@ -36,6 +18,7 @@ const sitedataSlice = createSlice({
       state.categories = action.payload.categories;
       state.posts = action.payload.posts;
       state.projects = action.payload.projects;
+      state.paths = action.payload.paths;
     });
   },
 });
@@ -43,7 +26,7 @@ const sitedataSlice = createSlice({
 async function readFiles(files: string[]) {
   return await Promise.all(
     files.map((path) =>
-      fetch(path.replace("/public", ""))
+      fetch(path + ".md")
         .then((response) => response.text())
         .then((text) => {
           const fm = readMarkdown(text).frontMatter;
@@ -53,7 +36,7 @@ async function readFiles(files: string[]) {
             description: fm.description,
             image: fm.image,
             date: fm.date,
-            path: path.replace("/public", "").replace(".md", ""),
+            path: path,
           };
         })
     )
@@ -61,13 +44,14 @@ async function readFiles(files: string[]) {
 }
 
 export const loadAsync = createAsyncThunk("sitedata/loadAsync", async () => {
-  const projectFiles = Object.keys(
-    import.meta.glob("/public/projects/*.md")
-  ).reverse();
-  const postFiles = Object.keys(
-    import.meta.glob("/public/posts/*.md")
-  ).reverse();
+  const projectFiles = Object.keys(import.meta.glob("/public/projects/*.md"))
+    .map((path) => path.replace("/public", "").replace(".md", ""))
+    .reverse();
+  const postFiles = Object.keys(import.meta.glob("/public/posts/*.md"))
+    .map((path) => path.replace("/public", "").replace(".md", ""))
+    .reverse();
 
+  const paths = projectFiles.concat(postFiles);
   const posts = await readFiles(postFiles);
   const projects = await readFiles(projectFiles);
   const categoryMap = new Map();
@@ -84,7 +68,7 @@ export const loadAsync = createAsyncThunk("sitedata/loadAsync", async () => {
       children: categoryMap.get(key),
     } as CategoryListing;
   });
-  return { categories, posts, projects };
+  return { categories, posts, projects, paths };
 });
 
 export const sitedataReducer = sitedataSlice.reducer;
