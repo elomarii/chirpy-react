@@ -267,6 +267,7 @@ header {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      color: var(--main-light);
 
       &:hover {
         color: var(--toc-highlight);
@@ -280,11 +281,11 @@ header {
 
     .is-active-link {
       color: var(--toc-highlight) !important;
-      font-weight: 600;
+      font-weight: 500;
 
       &::before {
         display: inline-block;
-        width: 1px;
+        width: 10px;
         left: -1px;
         height: 1.25rem;
         background-color: var(--toc-highlight) !important;
