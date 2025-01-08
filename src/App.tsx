@@ -9,11 +9,12 @@ import { AppDispatch } from "./state/store";
 import { useSelector } from "react-redux";
 import { RootState } from "./state/store";
 import Toc from "./components/Toc";
+import { hide } from "./state/reducerNavbar";
 
 function App() {
   const sitedata = useSelector((state: RootState) => state.sitedata.paths);
+  const dispatch = useDispatch<AppDispatch>();
   if (sitedata.length === 0) {
-    const dispatch = useDispatch<AppDispatch>();
     dispatch(loadAsync());
   }
   return (
@@ -23,7 +24,7 @@ function App() {
       <div id="main-wrapper" className="d-flex justify-content-center">
         <div className="container d-flex flex-column px-xxl-5">
           <TopBar />
-          <div className="row flex-grow-1">
+          <div className="row flex-grow-1" onClick={() => dispatch(hide())}>
             {/* MAIN CONTENT */}
             <main
               aria-label="Main Content"
