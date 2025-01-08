@@ -95,17 +95,6 @@
   border-radius: $base-radius;
 }
 
-%img-caption {
-  + em {
-    display: block;
-    text-align: center;
-    font-style: normal;
-    font-size: 80%;
-    padding: 0;
-    color: #6d6c6c;
-  }
-}
-
 %sidebar-links {
   color: var(--sidebar-muted-color);
   -webkit-user-select: none;

@@ -61,6 +61,13 @@ function Post({ showHeader = true }: Props) {
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
                 components={{
+                  img: (element) => (
+                    <img
+                      className="img-caption"
+                      alt={element.alt}
+                      src={element.src}
+                    />
+                  ),
                   h2: ({ children }) => {
                     const id = headerToId(children?.toString() ?? "");
                     return (
