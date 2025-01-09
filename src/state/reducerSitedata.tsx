@@ -6,7 +6,6 @@ const sitedataInitialState: SitedataState = {
   categories: [],
   posts: [],
   projects: [],
-  paths: [],
   loading: true,
 };
 

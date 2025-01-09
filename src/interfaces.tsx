@@ -17,6 +17,6 @@ export interface SitedataState {
   categories: CategoryListing[];
   posts: ArticleProps[];
   projects: ArticleProps[];
-  paths: string[];
+  paths?: string[];
   loading: boolean;
 }

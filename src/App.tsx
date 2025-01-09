@@ -14,9 +14,8 @@ import { hide } from "./state/reducerNavbar";
 function App() {
   const sitedata = useSelector((state: RootState) => state.sitedata.paths);
   const dispatch = useDispatch<AppDispatch>();
-  if (sitedata.length === 0) {
-    dispatch(loadAsync());
-  }
+  if (!sitedata) dispatch(loadAsync());
+
   return (
     <>
       {/* NAVBAR */}
