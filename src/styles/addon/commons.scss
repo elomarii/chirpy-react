@@ -53,7 +53,7 @@ a {
 img {
   display: flex;
   justify-self: center;
-  width: 93%;
+  width: 100%;
   height: auto;
   transition: all 0.35s ease-in-out;
 
@@ -436,6 +436,10 @@ main {
   em {
     @extend %normal-font-style;
   }
+}
+
+.img-caption {
+  width: 95%;
 }
 
 .img-caption + em {
@@ -1114,10 +1118,17 @@ search {
   }
 } /* #search-results */
 
+.ascii-art {
+  font-size: x-small;
+  line-height: 0.65rem;
+  overflow: hidden;
+  margin-top: 3em;
+}
+
 #topbar-title {
   display: none;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: sans-serif;
   color: var(--topbar-text-color);
   text-align: center;

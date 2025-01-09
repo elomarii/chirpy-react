@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { listToString } from "../utils";
-import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -40,7 +40,10 @@ function BlogCard({
               </div>
               <div className="post-meta flex-grow-1 d-flex align-items-end">
                 <div className="me-auto">
-                  <span>{`${date} :: `}</span>
+                  <span>
+                    <FontAwesomeIcon icon={faCalendarAlt} />
+                    {` ${date} ~ `}
+                  </span>
                   <span>
                     <FontAwesomeIcon icon={faFolderOpen} />
                     {` ${listToString(categories)}`}

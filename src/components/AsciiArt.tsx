@@ -5,12 +5,5 @@ interface ArtProps {
 }
 
 export default function AsciiArt({ art }: ArtProps): ReactNode {
-  const style: React.CSSProperties = {
-    font: "0.8em Inconsolata, monospace",
-    lineHeight: "1.15em",
-    marginTop: "2em",
-    overflow: "clip",
-  };
-
-  return <pre style={style}>{art}</pre>;
+  return <pre className="ascii-art">{art}</pre>;
 }

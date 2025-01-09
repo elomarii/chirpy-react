@@ -10,7 +10,7 @@ export default function Toc() {
   // have issues selecting headers right after rendering of the page
   setTimeout(() => {
     const observer = new IntersectionObserver((entries) =>
-      entries.forEach((e) => {
+      entries.reverse().forEach((e) => {
         if (e.isIntersecting) {
           setActiveId(e.target.id);
         }

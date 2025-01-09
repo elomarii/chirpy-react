@@ -5,15 +5,19 @@ import AsciiArt from "../components/AsciiArt";
 import { artProject } from "../globals";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
+import { resetToc } from "../utils";
 
 export default function Projects() {
   const projects = useSelector((state: RootState) => state.sitedata.projects);
+  const loading = useSelector((state: RootState) => state.sitedata.loading);
   const [page, setPage] = useState(0);
   const projectsCount: number = projects.length;
   const articlePerPage: number = 12;
   const pagesCount: number = Math.ceil(projectsCount / articlePerPage);
-
-  return (
+  resetToc();
+  return loading ? (
+    <></>
+  ) : (
     <>
       <div id="project-list" className="container my-5">
         <div className="row g-4">

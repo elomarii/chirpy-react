@@ -1,4 +1,8 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as yaml from "yaml";
+import { set } from "./state/reducerToc";
+import { RootState } from "./state/store";
 
 export function readMarkdown(input: string): {
   frontMatter: Record<string, any>;
@@ -38,4 +42,13 @@ export function listToString(list: string[]): string {
 
 export function headerToId(header: string): string {
   return header.toString().toLowerCase().replace(/\./g, "").replace(/\s/g, "-");
+}
+
+export function resetToc() {
+  // remove toc if its assigned from a previous post
+  const dispatch = useDispatch();
+  const toc = useSelector((state: RootState) => state.toc.headers);
+  useEffect(() => {
+    if (toc.length > 0) dispatch(set([]));
+  });
 }

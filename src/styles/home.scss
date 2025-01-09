@@ -26,6 +26,7 @@
       img {
         display: block;
         justify-self: center;
+        object-fit: scale-down;
         @extend %img-radius;
         max-height: 160px;
       }
