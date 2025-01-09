@@ -17,32 +17,30 @@ export default function Projects() {
   resetToc();
   return loading ? (
     <></>
+  ) : projectsCount == 0 ? (
+    <AsciiArt art={artProject} />
   ) : (
     <>
       <div id="project-list" className="container my-5">
         <div className="row g-4">
-          {projectsCount == 0 ? (
-            <AsciiArt art={artProject} />
-          ) : (
-            projects
-              .slice(
-                page * articlePerPage,
-                Math.min((page + 1) * articlePerPage, projectsCount)
-              )
-              .map((fmatter, index) => {
-                return (
-                  <ProjectCard
-                    title={fmatter.title}
-                    path={fmatter.path.replace(".md", "")}
-                    description={fmatter.description}
-                    categories={fmatter.categories}
-                    date={fmatter.date}
-                    image={fmatter.image}
-                    key={index}
-                  />
-                );
-              })
-          )}
+          {projects
+            .slice(
+              page * articlePerPage,
+              Math.min((page + 1) * articlePerPage, projectsCount)
+            )
+            .map((fmatter, index) => {
+              return (
+                <ProjectCard
+                  title={fmatter.title}
+                  path={fmatter.path.replace(".md", "")}
+                  description={fmatter.description}
+                  categories={fmatter.categories}
+                  date={fmatter.date}
+                  image={fmatter.image}
+                  key={index}
+                />
+              );
+            })}
         </div>
       </div>
       <Pagination

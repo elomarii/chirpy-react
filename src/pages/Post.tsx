@@ -47,7 +47,7 @@ function Post({ showHeader = true }: Props) {
     <article className="x-1">
       {!loading && !reading ? (
         <>
-          {!(paths.includes(path) || path === "/whoami") ? (
+          {!(paths?.includes(path) || path === "/whoami") ? (
             <NotFound />
           ) : (
             <>

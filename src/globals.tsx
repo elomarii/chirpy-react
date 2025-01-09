@@ -1,6 +1,6 @@
 export const site = {
   name: "Ibrahim",
-  description: "Jnior Iformatik",
+  description: "Engineer",
   avatar: "/assets/avatar.png",
 };
 
