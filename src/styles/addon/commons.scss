@@ -7,7 +7,7 @@ html {
     @include dark-scheme;
   }
 
-  & {font-size: 16px;}
+  & {font-size: 15px;}
 }
 
 body {
@@ -51,7 +51,9 @@ a {
 }
 
 img {
-  max-width: 100%;
+  display: flex;
+  justify-self: center;
+  width: 100%;
   height: auto;
   transition: all 0.35s ease-in-out;
 
@@ -60,56 +62,6 @@ img {
 
     -webkit-filter: blur($blur);
     filter: blur($blur);
-  }
-}
-
-.browserize {
-  border-top: 38px solid rgba(54, 56, 58, 0.7);
-  box-shadow: 0 0.1em 1em 0 rgba(95, 70, 70, 0.4);
-  position: relative;
-  border-radius: 5px 5px 5px 5px;
-  margin-left: 2em;
-  margin-right: 2em;
-
-  &::before {
-    display: block;
-    position: absolute;
-    content: '';
-    top: -24px;
-    left: 1em;
-    width: 0.5em;
-    height: 0.5em;
-    border-radius: 50%;
-    background-color: #f44;
-    box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
-  }
-
-  &::after {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    content: attr(url);
-    padding-left: 0.5em;
-    font-size: small;
-    color: black;
-    overflow: hidden;
-    top: -32px;
-    left: 7em;
-    width: calc(100% - 8em);
-    height: 26px;
-    border-radius: 5px;
-    background-color: rgb(209, 209, 209);
-  }
-
-  & > * {
-    display: block !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-
-  img {
-    border-radius: 0px 0px 5px 5px;
-    width: 100%;
   }
 }
 
@@ -436,6 +388,19 @@ main {
   }
 }
 
+.img-caption {
+  width: 95%;
+}
+
+.img-caption + em {
+  display: block;
+  text-align: center;
+  font-style: normal;
+  font-size: 80%;
+  padding-top: 3px;
+  color: #6d6c6c;
+}
+
 .content {
   font-size: 1.08rem;
   margin-top: 2rem;
@@ -444,7 +409,6 @@ main {
   a {
     &.popup {
       @extend %no-cursor;
-      @extend %img-caption;
       @include mt-mb(0.5rem);
 
       cursor: zoom-in;
@@ -605,15 +569,11 @@ main {
     margin: auto;
     margin-bottom: 0;
   }
-
-  @extend %img-caption;
 }
 
 .embed-audio {
   width: 100%;
   display: block;
-
-  @extend %img-caption;
 }
 
 /* --- buttons --- */
@@ -1108,10 +1068,17 @@ search {
   }
 } /* #search-results */
 
+.ascii-art {
+  font-size: x-small;
+  line-height: 0.65rem;
+  overflow: hidden;
+  margin-top: 3em;
+}
+
 #topbar-title {
   display: none;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: sans-serif;
   color: var(--topbar-text-color);
   text-align: center;

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { listToString } from "../utils";
 import { faCalendarAlt, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 interface Props {
   title: string;
@@ -22,7 +23,7 @@ function ProjectCard({
   return (
     <div className="col-12 col-md-6 col-lg-6 d-flex">
       <article className="card-wrapper card">
-        <a href={path} className="post-preview">
+        <Link to={path} className="post-preview">
           <div className="image-wrapper">
             {image ? (
               <img src={image} alt={title} className="project-thumb" />
@@ -58,7 +59,7 @@ function ProjectCard({
               </div>
             </div>
           </div>
-        </a>
+        </Link>
       </article>
     </div>
   );

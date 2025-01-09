@@ -1,13 +1,21 @@
-import { ReactNode } from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import TopBar from "./components/Topbar";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
+import { useDispatch } from "react-redux";
+import { loadAsync } from "./state/reducerSitedata";
+import { AppDispatch } from "./state/store";
+import { useSelector } from "react-redux";
+import { RootState } from "./state/store";
+import Toc from "./components/Toc";
+import { hide } from "./state/reducerNavbar";
 
-interface Props {
-  children: ReactNode;
-}
+function App() {
+  const sitedata = useSelector((state: RootState) => state.sitedata.paths);
+  const dispatch = useDispatch<AppDispatch>();
+  if (!sitedata) dispatch(loadAsync());
 
-function App({ children }: Props) {
   return (
     <>
       {/* NAVBAR */}
@@ -15,13 +23,13 @@ function App({ children }: Props) {
       <div id="main-wrapper" className="d-flex justify-content-center">
         <div className="container d-flex flex-column px-xxl-5">
           <TopBar />
-          <div className="row flex-grow-1">
+          <div className="row flex-grow-1" onClick={() => dispatch(hide())}>
             {/* MAIN CONTENT */}
             <main
               aria-label="Main Content"
               className="col-12 col-lg-11 col-xl-9 px-md-4"
             >
-              {children}
+              <RouterProvider router={router} />
             </main>
 
             {/* SIDEBAR */}
@@ -31,6 +39,7 @@ function App({ children }: Props) {
               className="col-xl-3 ps-2 mb-5 text-muted"
             >
               <div className="access">
+                <Toc />
                 {/* {% include_cached update-list.html lang=lang %}
               {% include_cached trending-tags.html lang=lang %} */}
               </div>

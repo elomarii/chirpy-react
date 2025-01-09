@@ -1,20 +1,14 @@
-import { useState } from "react";
 import { site } from "../globals";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { hide, show } from "../state/reducerNavbar";
 
 function TopBar() {
-  const [navbarState, setNavbarState] = useState(false);
+  const navbarVisiblity = useSelector((state: RootState) => state.navbar.show);
+  const dispatch = useDispatch();
   const baseTitle = site.name + "@blog:~";
-
-  const navbarHandler = () => {
-    if (navbarState) {
-      document.body.setAttribute("sidebar-display", "");
-    } else {
-      document.body.removeAttribute("sidebar-display");
-    }
-    setNavbarState(!navbarState);
-  };
 
   const getTitle = () => {
     const location: string = document.location.pathname;
@@ -38,7 +32,9 @@ function TopBar() {
         <button
           type="button"
           id="sidebar-trigger"
-          onClick={navbarHandler}
+          onClick={() =>
+            navbarVisiblity ? dispatch(hide()) : dispatch(show())
+          }
           className="btn btn-link"
         >
           <FontAwesomeIcon icon={faBars} color="gray" />

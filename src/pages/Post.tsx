@@ -1,134 +1,111 @@
 import { useEffect, useState } from "react";
-import { readMarkdown } from "../utils";
+import { headerToId, readMarkdown } from "../utils";
 import Markdown from "react-markdown";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import NotFound from "./NotFound";
+import PostHeader from "../components/PostHeader";
+import CodeBlock from "../components/CodeBlock";
+import { useDispatch } from "react-redux";
+import { set } from "../state/reducerToc";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCode,
-  faFileCode,
-  faTerminal,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
-  path: string;
   showHeader?: boolean;
 }
 
-function Post({ path, showHeader = true }: Props) {
+function Post({ showHeader = true }: Props) {
   const [content, setContent] = useState("");
   const [frontMatter, setFrontMatter] = useState(Object);
-  const [loading, setLoading] = useState(true);
+  const [reading, setReading] = useState(true);
+  const path = window.location.pathname;
+  const dispatch = useDispatch();
+  const paths = useSelector((state: RootState) => state.sitedata.paths);
+  const loading = useSelector((state: RootState) => state.sitedata.loading);
 
   useEffect(() => {
-    fetch(path)
+    fetch(path + ".md")
       .then((response) => response.text())
       .then((text) => {
         const { frontMatter, content } = readMarkdown(text);
         setContent(content);
         setFrontMatter(frontMatter);
-        setLoading(false);
+        setReading(false);
+        const toc = Array.from(document.querySelectorAll(".content h2")).map(
+          (h2) => h2.children.item(0)?.textContent
+        );
+        if (toc.length > 0 && showHeader) {
+          dispatch(set(toc));
+        }
       });
-  }, []);
+  }, [loading]);
 
   return (
     <article className="x-1">
-      {showHeader && !loading ? (
+      {!loading && !reading ? (
         <>
-          <header>
-            <h1 data-doc-skip>{frontMatter.title}</h1>
-            <p className="post-desc fw-light mb-4">{frontMatter.description}</p>
-            <div className="post-meta text-muted">
-              <div className="d-flex justify-content-between">
-                <span>
-                  Posted on
-                  <em> {new Date(frontMatter.date).toDateString()}</em>
-                </span>
-                <div>
-                  <span
-                    className="readtime"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="bottom"
-                    title={content.split(" ").length.toString()}
-                  >
-                    <em>
-                      {Math.max(Math.floor(content.split(" ").length / 180), 1)}{" "}
-                      min{" "}
-                    </em>
-                    read
-                  </span>
-                </div>
-              </div>
-            </div>
-          </header>
-          <hr />
-          {frontMatter.banner ? (
-            <img
-              className="post-banner"
-              title="banner"
-              alt="banner"
-              src={frontMatter.banner}
-            />
+          {!(paths?.includes(path) || path === "/whoami") ? (
+            <NotFound />
           ) : (
-            <></>
+            <>
+              <PostHeader
+                frontmatter={frontMatter}
+                readtime={Math.floor(content.split(" ").length / 180)}
+                show={showHeader}
+              />
+              <Markdown
+                className="content"
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+                components={{
+                  img: (element) => (
+                    <img
+                      className="img-caption"
+                      alt={element.alt}
+                      src={element.src}
+                    />
+                  ),
+                  h2: ({ children }) => {
+                    const id = headerToId(children?.toString() ?? "");
+                    return (
+                      <h2 id={id}>
+                        <span>{children}</span>
+                        <a href={`#${id}`} className="anchor text-muted">
+                          <FontAwesomeIcon
+                            icon={faHashtag}
+                            style={{ padding: "0 0.5em 0 0.5em" }}
+                          />
+                        </a>
+                      </h2>
+                    );
+                  },
+                  table: ({ children }) => (
+                    <div className="table-wrapper">
+                      <table>{children}</table>
+                    </div>
+                  ),
+                  code: ({ node, className, children }) => (
+                    <CodeBlock
+                      name={className}
+                      children={children}
+                      inline={
+                        node?.position?.start.line === node?.position?.end.line
+                      }
+                    />
+                  ),
+                }}
+              >
+                {content}
+              </Markdown>
+            </>
           )}
-          <hr />
         </>
       ) : (
         <></>
       )}
-      <Markdown
-        className="content"
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
-        components={{
-          table: ({ children }) => (
-            <div className="table-wrapper">
-              <table>{children}</table>
-            </div>
-          ),
-          code: ({ node, className, children }) => {
-            const lista = className?.split(",") ?? [];
-            const title =
-              lista.length === 1 ? "Code" : lista.length > 1 ? lista[1] : "";
-            return node?.position?.start.line === node?.position?.end.line ? (
-              <code className="inline-code">{children}</code>
-            ) : (
-              <div>
-                <div className="code-header">
-                  <div className="buttons" />
-                  <FontAwesomeIcon
-                    icon={
-                      lista.length === 0
-                        ? faTerminal
-                        : lista.length === 1
-                        ? faCode
-                        : faFileCode
-                    }
-                  />
-                  {title}
-                </div>
-                <SyntaxHighlighter
-                  language={lista[0]}
-                  style={atomOneDark}
-                  showLineNumbers={title === "" ? false : true}
-                  codeTagProps={{ className: "code-block" }}
-                  customStyle={{
-                    borderRadius: "0 0 10px 10px",
-                    backgroundColor: "var(--mask-bg)",
-                  }}
-                >
-                  {String(children).replace(/\n$/, "")}
-                </SyntaxHighlighter>
-              </div>
-            );
-          },
-        }}
-      >
-        {content}
-      </Markdown>
     </article>
   );
 }
