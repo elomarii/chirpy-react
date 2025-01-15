@@ -3,8 +3,8 @@ import { RootState } from "../state/store";
 import Page from "./Page";
 import { Link, useParams } from "react-router-dom";
 import AsciiArt from "../components/AsciiArt";
-import { artNothing } from "../globals";
-import { resetToc } from "../utils";
+import { artNothing } from "../utils/ascii";
+import { resetToc } from "../utils/utils";
 
 function Category() {
   const posts = useSelector((state: RootState) => state.sitedata.posts);

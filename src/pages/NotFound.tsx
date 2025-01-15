@@ -1,13 +1,5 @@
 import AsciiArt from "../components/AsciiArt";
-
-const four0four: string = `
-██╗  ██╗ ██████╗ ██╗  ██╗
-██║  ██║██╔═████╗██║  ██║
-███████║██║██╔██║███████║
-╚════██║████╔╝██║╚════██║
-     ██║╚██████╔╝     ██║
-     ╚═╝ ╚═════╝      ╚═╝
-`;
+import { four0four } from "../utils/ascii";
 
 export default function NotFound() {
   return (

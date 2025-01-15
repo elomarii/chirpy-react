@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { headerToId, readMarkdown } from "../utils";
+import { headerToId, readMarkdown } from "../utils/utils";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";

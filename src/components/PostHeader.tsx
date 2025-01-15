@@ -1,4 +1,4 @@
-import { ArticleProps } from "../interfaces";
+import { ArticleProps } from "../utils/interfaces";
 
 interface Props {
   frontmatter: ArticleProps;

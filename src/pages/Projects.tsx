@@ -2,10 +2,10 @@ import { useState } from "react";
 import Pagination from "../components/Pagination";
 import ProjectCard from "../components/ProjectCard";
 import AsciiArt from "../components/AsciiArt";
-import { artProject } from "../globals";
+import { artProject } from "../utils/ascii";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
-import { resetToc } from "../utils";
+import { resetToc } from "../utils/utils";
 
 export default function Projects() {
   const projects = useSelector((state: RootState) => state.sitedata.projects);

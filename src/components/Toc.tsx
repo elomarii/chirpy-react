@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
-import { headerToId } from "../utils";
+import { headerToId } from "../utils/utils";
 import { useState } from "react";
 
 export default function Toc() {

@@ -2,10 +2,10 @@ import { useState } from "react";
 import BlogCard from "../components/BlogCard";
 import Pagination from "../components/Pagination";
 import AsciiArt from "../components/AsciiArt";
-import { artBlog } from "../globals";
+import { artBlog } from "../utils/ascii";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
-import { resetToc } from "../utils";
+import { resetToc } from "../utils/utils";
 
 export default function Home() {
   const posts = useSelector((state: RootState) => state.sitedata.posts);

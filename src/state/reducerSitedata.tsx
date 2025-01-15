@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { readMarkdown } from "../utils";
-import { CategoryListing, SitedataState } from "../interfaces";
+import { readMarkdown } from "../utils/utils";
+import { CategoryListing, SitedataState } from "../utils/interfaces";
 
 const sitedataInitialState: SitedataState = {
   categories: [],

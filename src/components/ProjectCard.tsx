@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { listToString } from "../utils";
+import { listToString } from "../utils/utils";
 import { faCalendarAlt, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 

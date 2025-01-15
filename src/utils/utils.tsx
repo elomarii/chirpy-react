@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as yaml from "yaml";
-import { set } from "./state/reducerToc";
-import { RootState } from "./state/store";
+import { set } from "../state/reducerToc";
+import { RootState } from "../state/store";
 
 export function readMarkdown(input: string): {
   frontMatter: Record<string, any>;

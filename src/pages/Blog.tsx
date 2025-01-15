@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Page from "./Page";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import AsciiArt from "../components/AsciiArt";
-import { artBlog } from "../globals";
+import { artBlog } from "../utils/ascii";
 import { RootState } from "../state/store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
